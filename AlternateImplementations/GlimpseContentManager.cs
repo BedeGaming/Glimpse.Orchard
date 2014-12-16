@@ -59,7 +59,7 @@ namespace Glimpse.Orchard.AlternateImplementations
             {
                 ContentId = id,
                 ContentType = r.ContentType,
-                Name = GetContentType(id, r, options),
+                Name = r.GetContentName(),
                 Duration = t.Duration,
                 //VersionOptions = options
             }, TimelineCategories.ContentManagement, r => "Get: " + GetContentType(id, r, options), r=> r.GetContentName()).ActionResult;
