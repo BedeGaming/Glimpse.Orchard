@@ -35,14 +35,15 @@ namespace Glimpse.Orchard.AlternateImplementations {
                 var timedResult = _performanceMonitor.Time(() => {
                     var result = driver.BuildDisplay(context);
                     var publish = result != null;
-                    if (publish) {
+                    if (publish)
+                    {
                         result.Apply(context);
                     }
 
                     return publish;
                 });
 
-                if (timedResult.ActionResult)
+                if (timedResult.ActionResult && context.ContentPart!=null)
                 {
                     _performanceMonitor.PublishMessage(new TimelineMessage
                     {
