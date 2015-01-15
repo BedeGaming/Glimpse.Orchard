@@ -133,7 +133,6 @@
     <Compile Include="Extensions\ContentExtensions.cs" />
     <Compile Include="Filters\SiteSettingsFilter.cs" />
     <Compile Include="Filters\EnabledFeaturesFilter.cs" />
-    <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="MessageBrokers\IPerformanceMessageBroker.cs" />
     <Compile Include="MessageBrokers\DefaultMessageBroker.cs" />
     <Compile Include="Models\PerfmonCategory.cs" />
@@ -147,7 +146,7 @@
     <Compile Include="PerfMon\Services\GlimpsePerformanceMonitor.cs" />
     <Compile Include="PerfMon\Services\IPerformanceMonitor.cs" />
     <Compile Include="Permissions\Permissions.cs" />
-    <Compile Include="SecurityPolicies\GlimpseSecurityPolicy.cs" />
+    <Compile Include="SecurityPolicies\WhitelistedIpAddressesSecurityPolicy.cs" />
     <Compile Include="Tabs\SiteSettings\SiteSettings.cs" />
     <Compile Include="Tabs\EnabledFeatures\EnabledFeatures.cs" />
     <Compile Include="Tabs\Authorizer\Authorizer.cs" />
