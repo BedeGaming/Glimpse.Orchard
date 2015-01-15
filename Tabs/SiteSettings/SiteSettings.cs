@@ -14,7 +14,7 @@ namespace Glimpse.Orchard.Tabs.SiteSettings
         public object Value { get; set; }
     }
 
-    public class EnabledFeaturesTab : TabBase, ITabSetup, IKey
+    public class SiteSettingsTab : TabBase, ITabSetup, IKey
     {
         public override object GetData(ITabContext context)
         {
