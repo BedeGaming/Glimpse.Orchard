@@ -1,6 +1,6 @@
 ﻿namespace Glimpse.Orchard.Models
 {
-    internal static class TimelineCategories
+    public static class TimelineCategories
     {
         public static PerfmonCategory Widgets = new PerfmonCategory("Widgets", "#3939AA", "#595980");
         public static PerfmonCategory Layers = new PerfmonCategory("Layers", "#AA3939", "#805959");
