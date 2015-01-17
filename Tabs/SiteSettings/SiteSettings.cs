@@ -10,11 +10,13 @@ namespace Glimpse.Orchard.Tabs.SiteSettings
 {
     public class SiteSettingsTab : TabBase, ITabSetup, IKey
     {
-        public override object GetData(ITabContext context)
+        public override object GetData(ITabContext context) 
         {
-            if (context.GetMessages<GlimpseMessage<SiteSettingMessage>>().Any())
+            var messages = context.GetMessages<GlimpseMessage<SiteSettingMessage>>().ToList();
+
+            if (messages.Any())
             {
-                return context.GetMessages<GlimpseMessage<SiteSettingMessage>>().ToList();
+                return messages;
             }
 
             return "There is no data available for this tab, check that the 'Glimpse for Orchard Site Settings' feature is enabled.";

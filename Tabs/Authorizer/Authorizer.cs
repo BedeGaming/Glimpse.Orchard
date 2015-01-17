@@ -11,7 +11,6 @@ namespace Glimpse.Orchard.Tabs.Authorizer
 {
     public class AuthorizerManagerTab : TabBase, ITabSetup, IKey
     {
-
         public override object GetData(ITabContext context) 
         {
             var messages = context.GetMessages<GlimpseMessage<AuthorizerMessage>>().ToList();
