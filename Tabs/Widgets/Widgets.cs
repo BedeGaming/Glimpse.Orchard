@@ -1,32 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Core.Extensibility;
 using Glimpse.Core.Extensions;
-using Glimpse.Core.Message;
 using Glimpse.Core.Tab.Assist;
 using Glimpse.Orchard.Extensions;
-using Orchard.Widgets.Models;
+using Glimpse.Orchard.Models.Glimpse;
 
 namespace Glimpse.Orchard.Tabs.Widgets
 {
-    public class WidgetMessage : MessageBase
-    {
-        public string Title { get; set; }
-        public string Type { get; set; }
-        public string Zone { get; set; }
-        public string Position { get; set; }
-        public string TechnicalName { get; set; }
-        public LayerPart Layer { get; set; }
-        public TimeSpan Duration { get; set; }
-    }
-
     public class WidgetTab : TabBase, ITabSetup, IKey
     {
 
         public override object GetData(ITabContext context)
         {
-            var messages = context.GetMessages<WidgetMessage>().ToList();
+            var messages = context.GetMessages<GlimpseMessage<WidgetMessage>>().ToList();
 
             if (!messages.Any())
             {
@@ -43,7 +30,7 @@ namespace Glimpse.Orchard.Tabs.Widgets
 
         public void Setup(ITabSetupContext context)
         {
-            context.PersistMessages<WidgetMessage>();
+            context.PersistMessages<GlimpseMessage<WidgetMessage>>();
         }
 
         public string Key
@@ -52,12 +39,12 @@ namespace Glimpse.Orchard.Tabs.Widgets
         }
     }
 
-    public class WidgetMessagesConverter : SerializationConverter<IEnumerable<WidgetMessage>>
+    public class WidgetMessagesConverter : SerializationConverter<IEnumerable<GlimpseMessage<WidgetMessage>>>
     {
-        public override object Convert(IEnumerable<WidgetMessage> messages)
+        public override object Convert(IEnumerable<GlimpseMessage<WidgetMessage>> messages)
         {
             var root = new TabSection("Widget Title", "Widget Type", "Layer", "Layer Rule", "Zone", "Position", "Technical Name", "Build Display Duration");
-            foreach (var message in messages.OrderByDescending(m=>m.Duration))
+            foreach (var message in messages.Unwrap().OrderByDescending(m => m.Duration))
             {
                 root.AddRow()
                     .Column(message.Title)
@@ -78,7 +65,7 @@ namespace Glimpse.Orchard.Tabs.Widgets
                 .Column("")
                 .Column("")
                 .Column("Total time:")
-                .Column(messages.Sum(m => m.Duration.TotalMilliseconds).ToTimingString())
+                .Column(messages.Unwrap().Sum(m => m.Duration.TotalMilliseconds).ToTimingString())
                 .Selected();
 
             return root.Build();

@@ -1,39 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Core.Extensibility;
 using Glimpse.Core.Extensions;
-using Glimpse.Core.Message;
 using Glimpse.Core.Tab.Assist;
 using Glimpse.Orchard.Extensions;
-using Orchard.DisplayManagement.Shapes;
+using Glimpse.Orchard.Models.Glimpse;
 
 namespace Glimpse.Orchard.Tabs.Shapes
 {
-    public class ShapeMessage : MessageBase {
-        private readonly ShapeMetadata _metaData;
-        public ShapeMessage(ShapeMetadata metaData) {
-            _metaData = metaData;
-        }
-
-        public TimeSpan Duration { get; set; }
-        public string BindingName { get; set; }
-        public string BindingSource { get; set; }
-        public string Type { get { return _metaData.Type; } }
-        public string DisplayType { get { return _metaData.DisplayType; } }
-        public string Position { get { return _metaData.Position; } }
-        public string PlacementSource { get { return _metaData.PlacementSource; } }
-        public string Prefix { get { return _metaData.Prefix; } }
-        public IList<string> Wrappers { get { return _metaData.Wrappers.Any() ? _metaData.Wrappers : null; } }
-        public IList<string> Alternates { get { return _metaData.Alternates.Any() ? _metaData.Alternates : null; } }
-        public IList<string> BindingSources { get { return _metaData.BindingSources.Any() ? _metaData.BindingSources : null; } }
-    }
-
     public class ShapeTab : TabBase, ITabSetup, IKey
     {
         public override object GetData(ITabContext context)
         {
-            var messages = context.GetMessages<ShapeMessage>().ToList();
+            var messages = context.GetMessages<GlimpseMessage<ShapeMessage>>().ToList();
 
             if (!messages.Any())
             {
@@ -50,7 +29,7 @@ namespace Glimpse.Orchard.Tabs.Shapes
 
         public void Setup(ITabSetupContext context)
         {
-            context.PersistMessages<ShapeMessage>();
+            context.PersistMessages<GlimpseMessage<ShapeMessage>>();
         }
 
         public string Key
@@ -59,12 +38,12 @@ namespace Glimpse.Orchard.Tabs.Shapes
         }
     }
 
-    public class ShapeMessagesConverter : SerializationConverter<IEnumerable<ShapeMessage>>
+    public class ShapeMessagesConverter : SerializationConverter<IEnumerable<GlimpseMessage<ShapeMessage>>>
     {
-        public override object Convert(IEnumerable<ShapeMessage> messages)
+        public override object Convert(IEnumerable<GlimpseMessage<ShapeMessage>> messages)
         {
             var root = new TabSection("Type", "DisplayType", "Position", "Placement Source", "Prefix", "Binding Source", "Available Binding Sources", "Wrappers", "Alternates", "Build Display Duration");
-            foreach (var message in messages.OrderByDescending(m=>m.Duration.TotalMilliseconds)) {
+            foreach (var message in messages.Unwrap().OrderByDescending(m=>m.Duration.TotalMilliseconds)) {
                 if (message.Type != "Layout" //these exemptions are taken from the Shape Tracing Feature
                     && message.Type != "DocumentZone"
                     && message.Type != "PlaceChildContent"
@@ -97,7 +76,7 @@ namespace Glimpse.Orchard.Tabs.Shapes
                 .Column("")
                 .Column("")
                 .Column("Total time (includes nested times):")
-                .Column(messages.Sum(m => m.Duration.TotalMilliseconds).ToTimingString())
+                .Column(messages.Unwrap().Sum(m => m.Duration.TotalMilliseconds).ToTimingString())
                 .Selected();
 
             return root.Build();

@@ -1,30 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Glimpse.Core.Extensibility;
 using Glimpse.Core.Extensions;
-using Glimpse.Core.Message;
 using Glimpse.Core.Tab.Assist;
 using Glimpse.Orchard.Extensions;
+using Glimpse.Orchard.Models.Glimpse;
 
 namespace Glimpse.Orchard.Tabs.Cache
 {
-    public class CacheMessage : MessageBase
-    {
-        public string Action { get; set; }
-        public string Key { get; set; }
-        public object Value { get; set; }
-        public string Result { get; set; }
-        public TimeSpan ValidFor { get; set; }
-        public TimeSpan Duration { get; set; }
-    }
-
     public class CacheTab : TabBase, ITabSetup, IKey
     {
 
         public override object GetData(ITabContext context)
         {
-            return context.GetMessages<CacheMessage>();
+            return context.GetMessages<GlimpseMessage<CacheMessage>>();
         }
 
         public override string Name
@@ -34,7 +22,7 @@ namespace Glimpse.Orchard.Tabs.Cache
 
         public void Setup(ITabSetupContext context)
         {
-            context.PersistMessages<CacheMessage>();
+            context.PersistMessages<GlimpseMessage<CacheMessage>>();
         }
 
         public string Key
@@ -43,12 +31,12 @@ namespace Glimpse.Orchard.Tabs.Cache
         }
     }
 
-    public class CacheMessagesConverter : SerializationConverter<IEnumerable<CacheMessage>>
+    public class CacheMessagesConverter : SerializationConverter<IEnumerable<GlimpseMessage<CacheMessage>>>
     {
-        public override object Convert(IEnumerable<CacheMessage> messages)
+        public override object Convert(IEnumerable<GlimpseMessage<CacheMessage>> messages)
         {
             var root = new TabSection("Action", "Key", "Result", "Value", "Time Taken");
-            foreach (var message in messages)
+            foreach (var message in messages.Unwrap())
             {
                 root.AddRow()
                     .Column(message.Action)

@@ -35,7 +35,7 @@ namespace Glimpse.Orchard.Filters
                             && property.CanRead) {
                             var value = property.GetValue(sitePart, null);
 
-                            _performanceMonitor.PublishMessage(new SiteSettingsMessage {
+                            _performanceMonitor.PublishMessage(new SiteSettingMessage {
                                 Part = sitePart.PartDefinition.Name,
                                 Name = property.Name,
                                 Value = value

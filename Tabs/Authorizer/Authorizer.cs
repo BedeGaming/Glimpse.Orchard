@@ -1,33 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Core.Extensibility;
 using Glimpse.Core.Extensions;
-using Glimpse.Core.Message;
 using Glimpse.Core.Tab.Assist;
 using Glimpse.Orchard.Extensions;
+using Glimpse.Orchard.Models.Glimpse;
 using ITimedMessage = Glimpse.Orchard.PerfMon.Models.ITimedPerfMonMessage;
 
 namespace Glimpse.Orchard.Tabs.Authorizer
 {
-    public class AuthorizerMessage : MessageBase
-    {
-        public string PermissionName { get; set; }
-        public bool UserIsAuthorized { get; set; }
-        public int ContentId { get; set; }
-        public string ContentName { get; set; }
-        public string ContentType { get; set; }
-        public TimeSpan Duration { get; set; }
-    }
-
     public class AuthorizerManagerTab : TabBase, ITabSetup, IKey
     {
 
-        public override object GetData(ITabContext context)
+        public override object GetData(ITabContext context) 
         {
-            if (context.GetMessages<AuthorizerMessage>().Any())
+            var messages = context.GetMessages<GlimpseMessage<AuthorizerMessage>>().ToList();
+
+            if (messages.Any())
             {
-                return context.GetMessages<AuthorizerMessage>().ToList();
+                return messages;
             }
 
             return "There have been no Authorization events recorded. If you think there should have been, check that the 'Glimpse for Orchard Authorizer' feature is enabled.";
@@ -40,7 +31,7 @@ namespace Glimpse.Orchard.Tabs.Authorizer
 
         public void Setup(ITabSetupContext context)
         {
-            context.PersistMessages<AuthorizerMessage>();
+            context.PersistMessages<GlimpseMessage<AuthorizerMessage>>();
         }
 
         public string Key
@@ -49,12 +40,12 @@ namespace Glimpse.Orchard.Tabs.Authorizer
         }
     }
 
-    public class AuthorizerMessagesConverter : SerializationConverter<IEnumerable<AuthorizerMessage>>
+    public class AuthorizerMessagesConverter : SerializationConverter<IEnumerable<GlimpseMessage<AuthorizerMessage>>>
     {
-        public override object Convert(IEnumerable<AuthorizerMessage> messages)
+        public override object Convert(IEnumerable<GlimpseMessage<AuthorizerMessage>> messages)
         {
             var root = new TabSection("Permission Name", "User is Authorized", "Content Id", "Content Name", "Content Type", "Evaluation Time");
-            foreach (var message in messages.OrderByDescending(m => m.Duration))
+            foreach (var message in messages.Unwrap().OrderByDescending(m => m.Duration))
             {
                 root.AddRow()
                     .Column(message.PermissionName)
@@ -72,7 +63,7 @@ namespace Glimpse.Orchard.Tabs.Authorizer
                 .Column("")
                 .Column("")
                 .Column("Total time:")
-                .Column(messages.Sum(m=>m.Duration.TotalMilliseconds).ToTimingString())
+                .Column(messages.Unwrap().Sum(m=>m.Duration.TotalMilliseconds).ToTimingString())
                 .Selected();
 
             return root.Build();

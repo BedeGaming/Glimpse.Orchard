@@ -2,25 +2,19 @@
 using System.Linq;
 using Glimpse.Core.Extensibility;
 using Glimpse.Core.Extensions;
-using Glimpse.Core.Message;
 using Glimpse.Core.Tab.Assist;
+using Glimpse.Orchard.Extensions;
+using Glimpse.Orchard.Models.Glimpse;
 
 namespace Glimpse.Orchard.Tabs.SiteSettings
 {
-    public class SiteSettingsMessage : MessageBase
-    {
-        public string Part { get; set; }
-        public string Name { get; set; }
-        public object Value { get; set; }
-    }
-
     public class SiteSettingsTab : TabBase, ITabSetup, IKey
     {
         public override object GetData(ITabContext context)
         {
-            if (context.GetMessages<SiteSettingsMessage>().Any())
+            if (context.GetMessages<GlimpseMessage<SiteSettingMessage>>().Any())
             {
-                return context.GetMessages<SiteSettingsMessage>().ToList();
+                return context.GetMessages<GlimpseMessage<SiteSettingMessage>>().ToList();
             }
 
             return "There is no data available for this tab, check that the 'Glimpse for Orchard Site Settings' feature is enabled.";
@@ -33,7 +27,7 @@ namespace Glimpse.Orchard.Tabs.SiteSettings
 
         public void Setup(ITabSetupContext context)
         {
-            context.PersistMessages<SiteSettingsMessage>();
+            context.PersistMessages<GlimpseMessage<SiteSettingMessage>>();
         }
 
         public string Key
@@ -42,12 +36,12 @@ namespace Glimpse.Orchard.Tabs.SiteSettings
         }
     }
 
-    public class EnabledFeatureMessagesConverter : SerializationConverter<IEnumerable<SiteSettingsMessage>>
+    public class EnabledFeatureMessagesConverter : SerializationConverter<IEnumerable<GlimpseMessage<SiteSettingMessage>>>
     {
-        public override object Convert(IEnumerable<SiteSettingsMessage> messages)
+        public override object Convert(IEnumerable<GlimpseMessage<SiteSettingMessage>> messages)
         {
             var root = new TabSection("Part", "Name", "Value");
-            foreach (var message in messages.OrderBy(m => m.Part).ThenBy(m => m.Name))
+            foreach (var message in messages.Unwrap().OrderBy(m => m.Part).ThenBy(m => m.Name))
             {
                 root.AddRow()
                     .Column(message.Part)

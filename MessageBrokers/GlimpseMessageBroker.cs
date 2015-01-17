@@ -2,14 +2,17 @@
 using System.Web;
 using Glimpse.Core.Extensibility;
 using Glimpse.Core.Framework;
+using Glimpse.Core.Message;
+using Glimpse.Orchard.Models.Glimpse;
 using Orchard.Core.Common.Utilities;
 
 namespace Glimpse.Orchard.MessageBrokers {
-    public class DefaultMessageBroker : IPerformanceMessageBroker 
+    public class GlimpseMessageBroker : IPerformanceMessageBroker 
     {
         private readonly LazyField<IMessageBroker> _messageBroker;
 
-        public DefaultMessageBroker() {
+        public GlimpseMessageBroker()
+        {
             _messageBroker = new LazyField<IMessageBroker>();
 
             _messageBroker.Loader(() => {
@@ -23,8 +26,16 @@ namespace Glimpse.Orchard.MessageBrokers {
             });
         }
 
-        public void Publish<T>(T message) {
-            _messageBroker.Value.Publish(message);
+        public void Publish<T>(T message)
+        {
+            if (message is ITimelineMessage)
+            {
+                _messageBroker.Value.Publish(message);
+                return;
+            }
+
+            var wrappedMessage = new GlimpseMessage<T>(message);
+            _messageBroker.Value.Publish(wrappedMessage);
         }
 
         public Guid Subscribe<T>(Action<T> action)

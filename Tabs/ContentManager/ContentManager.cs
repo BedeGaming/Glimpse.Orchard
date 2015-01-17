@@ -1,28 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Core.Extensibility;
 using Glimpse.Core.Extensions;
-using Glimpse.Core.Message;
 using Glimpse.Core.Tab.Assist;
 using Glimpse.Orchard.Extensions;
-using Orchard.ContentManagement;
+using Glimpse.Orchard.Models.Glimpse;
 
 namespace Glimpse.Orchard.Tabs.ContentManager
 {
-    public class ContentManagerMessage : MessageBase
-    {
-        public int ContentId { get; set; }
-        public string Name { get; set; }
-        public string ContentType { get; set; }
-        public VersionOptions VersionOptions { get; set; }
-        public TimeSpan Duration { get; set; }
-    }
-
     public class ContentManagerTab : TabBase, ITabSetup, IKey, ILayoutControl
     {
         public override object GetData(ITabContext context) {
-            var messages = context.GetMessages<ContentManagerMessage>().ToList();
+            var messages = context.GetMessages<GlimpseMessage<ContentManagerMessage>>().ToList();
 
             if (!messages.Any())
             {
@@ -39,7 +28,7 @@ namespace Glimpse.Orchard.Tabs.ContentManager
 
         public void Setup(ITabSetupContext context)
         {
-            context.PersistMessages<ContentManagerMessage>();
+            context.PersistMessages<GlimpseMessage<ContentManagerMessage>>();
         }
 
         public string Key
@@ -50,12 +39,12 @@ namespace Glimpse.Orchard.Tabs.ContentManager
         public bool KeysHeadings { get { return false; } }
     }
 
-    public class ContentManagerGetMessagesConverter : SerializationConverter<IEnumerable<ContentManagerMessage>>
+    public class ContentManagerGetMessagesConverter : SerializationConverter<IEnumerable<GlimpseMessage<ContentManagerMessage>>>
     {
-        public override object Convert(IEnumerable<ContentManagerMessage> messages)
+        public override object Convert(IEnumerable<GlimpseMessage<ContentManagerMessage>> messages)
         {
             var root = new TabSection("Content Id", "Content Type", "Name", "Version Options", "Duration");
-            foreach (var message in messages.OrderByDescending(m => m.Duration))
+            foreach (var message in messages.Unwrap().OrderByDescending(m => m.Duration))
             {
                 root.AddRow()
                     .Column(message.ContentId)
@@ -70,7 +59,7 @@ namespace Glimpse.Orchard.Tabs.ContentManager
                 .Column("")
                 .Column("")
                 .Column("Total time:")
-                .Column(messages.Sum(m => m.Duration.TotalMilliseconds).ToTimingString())
+                .Column(messages.Unwrap().Sum(m => m.Duration.TotalMilliseconds).ToTimingString())
                 .Selected();
 
             return root.Build();

@@ -2,29 +2,21 @@
 using System.Linq;
 using Glimpse.Core.Extensibility;
 using Glimpse.Core.Extensions;
-using Glimpse.Core.Message;
 using Glimpse.Core.Tab.Assist;
-using Orchard.Environment.Extensions.Models;
+using Glimpse.Orchard.Extensions;
+using Glimpse.Orchard.Models.Glimpse;
 
 namespace Glimpse.Orchard.Tabs.EnabledFeatures
 {
-    public class EnabledFeatureMessage : MessageBase
-    {
-        public string Category { get; set; }
-        public string Name { get; set; }
-        public string FeatureId { get; set; }
-        public string Description { get; set; }
-        public int Priority { get; set; }
-        public ExtensionDescriptor Extension { get; set; }
-    }
-
     public class EnabledFeaturesTab : TabBase, ITabSetup, IKey
     {
-        public override object GetData(ITabContext context)
+        public override object GetData(ITabContext context) 
         {
-            if (context.GetMessages<EnabledFeatureMessage>().Any())
+            var messages = context.GetMessages<GlimpseMessage<EnabledFeatureMessage>>().ToList();
+
+            if (messages.Any())
             {
-                return context.GetMessages<EnabledFeatureMessage>().ToList();
+                return messages;
             }
 
             return "There is no data available for this tab, check that the 'Glimpse for Orchard Enabled Features' feature is enabled.";
@@ -37,7 +29,7 @@ namespace Glimpse.Orchard.Tabs.EnabledFeatures
 
         public void Setup(ITabSetupContext context)
         {
-            context.PersistMessages<EnabledFeatureMessage>();
+            context.PersistMessages<GlimpseMessage<EnabledFeatureMessage>>();
         }
 
         public string Key
@@ -46,12 +38,12 @@ namespace Glimpse.Orchard.Tabs.EnabledFeatures
         }
     }
 
-    public class EnabledFeatureMessagesConverter : SerializationConverter<IEnumerable<EnabledFeatureMessage>>
+    public class EnabledFeatureMessagesConverter : SerializationConverter<IEnumerable<GlimpseMessage<EnabledFeatureMessage>>>
     {
-        public override object Convert(IEnumerable<EnabledFeatureMessage> messages)
+        public override object Convert(IEnumerable<GlimpseMessage<EnabledFeatureMessage>> messages)
         {
             var root = new TabSection("Feature Type", "Category", "Name", "Description", "Id", "Priority");
-            foreach (var message in messages.OrderBy(m => m.Extension.ExtensionType).ThenBy(m => m.Category).ThenBy(m => m.Name))
+            foreach (var message in messages.Unwrap().OrderBy(m => m.Extension.ExtensionType).ThenBy(m => m.Category).ThenBy(m => m.Name))
             {
                 root.AddRow()
                     .Column(message.Extension.ExtensionType)

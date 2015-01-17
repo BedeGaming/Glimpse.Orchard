@@ -1,68 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Core.Extensibility;
 using Glimpse.Core.Extensions;
-using Glimpse.Core.Message;
 using Glimpse.Core.Tab.Assist;
 using Glimpse.Orchard.Extensions;
-using Orchard.ContentManagement;
+using Glimpse.Orchard.Models.Glimpse;
 
 namespace Glimpse.Orchard.Tabs.Parts
 {
-    public class PartMessage : MessageBase
-    {
-        public string ContentItemName { get; set; }
-        public string ContentItemType { get; set; }
-        public string ContentItemStereotype { get; set; }
-        public int ContentItemId { get; set; }
-        public string ContentPartType { get; set; }
-        public IEnumerable<ContentField> Fields { get; set; }
-        public TimeSpan Duration { get; set; }
-    }
-
-    //public class ContentDefinitionVM 
-    //{
-    //    public Dictionary<ContentTypeSummaryVM, IEnumerable<ContentPartSummaryVM>> Content { get; set; }
-    //}
-
-    //public class ContentTypeSummaryVM
-    //{
-    //    public string ContentItemName { get; set; }
-    //    public string ContentItemType { get; set; }
-    //    public string ContentItemStereotype { get; set; }
-    //    public int ContentItemId { get; set; }
-    //    public IEnumerable<ContentPartSummaryVM> Parts { get; set; }
-    //    public TimeSpan Duration { get; set; }
-
-    //}
-
-    //public class ContentPartSummaryVM
-    //{
-    //    public string ContentPartType { get; set; }
-    //    public IEnumerable<ContentField> Fields { get; set; }
-    //    public TimeSpan Duration { get; set; }
-    //}
-
     public class PartTab : TabBase, ITabSetup, IKey
     {
         public override object GetData(ITabContext context)
         {
-            var messages = context.GetMessages<PartMessage>().ToList();
+            var messages = context.GetMessages<GlimpseMessage<PartMessage>>().ToList();
 
             if (!messages.Any())
             {
                 return "There have been no Content Part Driver events recorded. If you think there should have been, check that the 'Glimpse for Orchard Content Part Drivers' feature is enabled.";
             }
-
-            //var vm = new ContentDefinitionVM {
-            //    Content = new Dictionary<ContentTypeSummaryVM, IEnumerable<ContentPartSummaryVM>>()
-            //};
-
-            //foreach (var contentItem in messages.Select(m=> new ContentTypeSummaryVM{ContentItemId = m.ContentItemId}).Distinct().ToList()) {
-            //    var scopedContentItem = contentItem;
-            //    vm.Content.Add(contentItem, messages.Where(m => m.ContentItemId == scopedContentItem.ContentItemId).Select(m=> new ContentPartSummaryVM{ContentPartType = m.ContentPartType}));
-            //}
 
             return messages;
         }
@@ -74,7 +29,7 @@ namespace Glimpse.Orchard.Tabs.Parts
 
         public void Setup(ITabSetupContext context)
         {
-            context.PersistMessages<PartMessage>();
+            context.PersistMessages<GlimpseMessage<PartMessage>>();
         }
 
         public string Key
@@ -84,12 +39,12 @@ namespace Glimpse.Orchard.Tabs.Parts
 
     }
 
-    public class PartMessagesConverter : SerializationConverter<IEnumerable<PartMessage>>
+    public class PartMessagesConverter : SerializationConverter<IEnumerable<GlimpseMessage<PartMessage>>>
     {
-        public override object Convert(IEnumerable<PartMessage> messages)
+        public override object Convert(IEnumerable<GlimpseMessage<PartMessage>> messages)
         {
             var root = new TabSection("Content Item Name", "Content Item Type", "Content Item Stereotype", "Content Part", "Fields", "Duration");
-            foreach (var message in messages.OrderByDescending(m=>m.Duration))
+            foreach (var message in messages.Unwrap().OrderByDescending(m=>m.Duration))
             {
                 root.AddRow()
                     .Column(message.ContentItemName)
@@ -106,7 +61,7 @@ namespace Glimpse.Orchard.Tabs.Parts
                 .Column("")
                 .Column("")
                 .Column("Total time:")
-                .Column(messages.Sum(m => m.Duration.TotalMilliseconds).ToTimingString())
+                .Column(messages.Unwrap().Sum(m => m.Duration.TotalMilliseconds).ToTimingString())
                 .Selected();
 
             return root.Build();

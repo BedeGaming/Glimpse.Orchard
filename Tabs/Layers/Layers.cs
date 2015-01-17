@@ -1,39 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Core.Extensibility;
 using Glimpse.Core.Extensions;
-using Glimpse.Core.Message;
 using Glimpse.Core.Tab.Assist;
 using Glimpse.Orchard.Extensions;
-using Glimpse.Orchard.PerfMon.Models;
+using Glimpse.Orchard.Models.Glimpse;
 
 namespace Glimpse.Orchard.Tabs.Layers
 {
-    public class TimelineMessage : MessageBase, ITimelineMessage, ITimedPerfMonMessage
-    {
-        public TimeSpan Offset { get; set; }
-        public TimeSpan Duration { get; set; }
-        public DateTime StartTime { get; set; }
-        public string EventName { get; set; }
-        public TimelineCategoryItem EventCategory { get; set; }
-        public string EventSubText { get; set; }
-    }
-
-    public class LayerMessage : MessageBase
-    {
-        public string Name { get; set; }
-        public string Rule { get; set; }
-        public bool Active { get; set; }
-        public TimeSpan Duration { get; set; }
-    }
-
     public class LayerTab : TabBase, ITabSetup, IKey
     {
-
         public override object GetData(ITabContext context) 
         {
-            var messages = context.GetMessages<LayerMessage>().ToList();
+            var messages = context.GetMessages<GlimpseMessage<LayerMessage>>().ToList();
 
             if (!messages.Any()) {
                 return "There have been no Layer events recorded. If you think there should have been, check that the 'Glimpse for Orchard Widgets' feature is enabled.";
@@ -49,7 +28,7 @@ namespace Glimpse.Orchard.Tabs.Layers
 
         public void Setup(ITabSetupContext context)
         {
-            context.PersistMessages<LayerMessage>();
+            context.PersistMessages<GlimpseMessage<LayerMessage>>();
         }
 
         public string Key
@@ -58,12 +37,12 @@ namespace Glimpse.Orchard.Tabs.Layers
         }
     }
 
-    public class LayerMessagesConverter : SerializationConverter<IEnumerable<LayerMessage>>
+    public class LayerMessagesConverter : SerializationConverter<IEnumerable<GlimpseMessage<LayerMessage>>>
     {
-        public override object Convert(IEnumerable<LayerMessage> messages)
+        public override object Convert(IEnumerable<GlimpseMessage<LayerMessage>> messages)
         {
             var root = new TabSection("Layer Name", "Layer Rule", "Active", "Evaluation Time");
-            foreach (var message in messages.OrderByDescending(m=>m.Duration))
+            foreach (var message in messages.Unwrap().OrderByDescending(m=>m.Duration))
             {
                 root.AddRow()
                     .Column(message.Name)
@@ -77,7 +56,7 @@ namespace Glimpse.Orchard.Tabs.Layers
                 .Column("")
                 .Column("")
                 .Column("Total time:")
-                .Column(messages.Sum(m => m.Duration.TotalMilliseconds).ToTimingString())
+                .Column(messages.Unwrap().Sum(m => m.Duration.TotalMilliseconds).ToTimingString())
                 .Selected();
 
             return root.Build();
