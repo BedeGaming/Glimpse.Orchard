@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using Glimpse.Orchard.Extensions;
+using Glimpse.Orchard.Glimpse.Extensions;
+using Glimpse.Orchard.Glimpse.Tabs.Layers;
 using Glimpse.Orchard.Models;
-using Glimpse.Orchard.PerfMon.Services;
-using Glimpse.Orchard.Tabs.Layers;
-using Glimpse.Orchard.Tabs.Parts;
+using Glimpse.Orchard.Models.Messages;
+using Glimpse.Orchard.PerformanceMonitors;
 using Orchard;
 using Orchard.ContentManagement.Drivers;
 using Orchard.ContentManagement.Drivers.Coordinators;

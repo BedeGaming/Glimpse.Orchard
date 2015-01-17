@@ -121,7 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Models\Messages\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
@@ -132,45 +131,44 @@
     <Compile Include="AlternateImplementations\GlimpseDisplayManager.cs" />
     <Compile Include="AlternateImplementations\GlimpseWidgetFilter.cs" />
     <Compile Include="Extensions\ContentExtensions.cs" />
-    <Compile Include="Extensions\GlimpseMessageExtensions.cs" />
+    <Compile Include="Glimpse\Extensions\GlimpseMessageExtensions.cs" />
     <Compile Include="Filters\SiteSettingsFilter.cs" />
     <Compile Include="Filters\EnabledFeaturesFilter.cs" />
     <Compile Include="MessageBrokers\IPerformanceMessageBroker.cs" />
-    <Compile Include="MessageBrokers\GlimpseMessageBroker.cs" />
-    <Compile Include="Models\Glimpse\GlimpseMessage.cs" />
-    <Compile Include="Models\Glimpse\GlimpseTimelineMessage.cs" />
+    <Compile Include="Glimpse\MessageBrokers\GlimpseMessageBroker.cs" />
+    <Compile Include="Glimpse\Models\GlimpseMessage.cs" />
+    <Compile Include="Glimpse\Models\GlimpseTimelineMessage.cs" />
     <Compile Include="Models\PerfmonCategory.cs" />
-    <Compile Include="Extensions\PerfmonCategoryExtensions.cs" />
+    <Compile Include="Glimpse\Extensions\PerfmonCategoryExtensions.cs" />
     <Compile Include="Models\TimelineCategories.cs" />
-    <Compile Include="PerfMon\Extensions\GlimpseTimerResultExtensions.cs" />
-    <Compile Include="PerfMon\Models\ITimedPerfMonMessage.cs" />
-    <Compile Include="PerfMon\Models\TimedActionResult.cs" />
-    <Compile Include="PerfMon\Models\TimerResult.cs" />
-    <Compile Include="PerfMon\Services\DefaultPerformanceMonitor.cs" />
-    <Compile Include="PerfMon\Services\GlimpsePerformanceMonitor.cs" />
-    <Compile Include="PerfMon\Services\IPerformanceMonitor.cs" />
-    <Compile Include="Permissions\Permissions.cs" />
-    <Compile Include="SecurityPolicies\WhitelistedIpAddressesSecurityPolicy.cs" />
-    <Compile Include="Tabs\Authorizer\AuthorizerMessage.cs" />
-    <Compile Include="Tabs\Cache\CacheMessage.cs" />
-    <Compile Include="Tabs\ContentManager\ContentManagerMessage.cs" />
-    <Compile Include="Tabs\EnabledFeatures\EnabledFeatureMessage.cs" />
-    <Compile Include="Tabs\Layers\LayerMessage.cs" />
-    <Compile Include="Tabs\Layers\TimelineMessage.cs" />
-    <Compile Include="Tabs\Parts\PartMessage.cs" />
-    <Compile Include="Tabs\Shapes\ShapeMessage.cs" />
-    <Compile Include="Tabs\SiteSettings\SiteSettings.cs" />
-    <Compile Include="Tabs\EnabledFeatures\EnabledFeatures.cs" />
-    <Compile Include="Tabs\Authorizer\Authorizer.cs" />
+    <Compile Include="PerformanceMonitors\Extensions\GlimpseTimerResultExtensions.cs" />
+    <Compile Include="PerformanceMonitors\Models\ITimedPerfMonMessage.cs" />
+    <Compile Include="PerformanceMonitors\Models\TimedActionResult.cs" />
+    <Compile Include="PerformanceMonitors\Models\TimerResult.cs" />
+    <Compile Include="PerformanceMonitors\NullPerformanceMonitor.cs" />
+    <Compile Include="Glimpse\PerformanceMonitors\GlimpsePerformanceMonitor.cs" />
+    <Compile Include="PerformanceMonitors\IPerformanceMonitor.cs" />
+    <Compile Include="Glimpse\SecurityPolicies\WhitelistedIpAddressesSecurityPolicy.cs" />
+    <Compile Include="Models\Messages\AuthorizerMessage.cs" />
+    <Compile Include="Models\Messages\CacheMessage.cs" />
+    <Compile Include="Models\Messages\ContentManagerMessage.cs" />
+    <Compile Include="Models\Messages\EnabledFeatureMessage.cs" />
+    <Compile Include="Models\Messages\LayerMessage.cs" />
+    <Compile Include="Glimpse\Tabs\Layers\TimelineMessage.cs" />
+    <Compile Include="Models\Messages\PartMessage.cs" />
+    <Compile Include="Models\Messages\ShapeMessage.cs" />
+    <Compile Include="Glimpse\Tabs\SiteSettings\SiteSettings.cs" />
+    <Compile Include="Glimpse\Tabs\EnabledFeatures\EnabledFeatures.cs" />
+    <Compile Include="Glimpse\Tabs\Authorizer\Authorizer.cs" />
     <Compile Include="Extensions\TimespanExtensions.cs" />
-    <Compile Include="Tabs\ContentManager\ContentManager.cs" />
-    <Compile Include="Tabs\Layers\Layers.cs" />
-    <Compile Include="Tabs\Shapes\Shapes.cs" />
-    <Compile Include="Tabs\Parts\Parts.cs" />
-    <Compile Include="Tabs\Cache\Cache.cs" />
-    <Compile Include="Tabs\SiteSettings\SiteSettingMessage.cs" />
-    <Compile Include="Tabs\Widgets\WidgetMessage.cs" />
-    <Compile Include="Tabs\Widgets\Widgets.cs" />
+    <Compile Include="Glimpse\Tabs\ContentManager\ContentManager.cs" />
+    <Compile Include="Glimpse\Tabs\Layers\Layers.cs" />
+    <Compile Include="Glimpse\Tabs\Shapes\Shapes.cs" />
+    <Compile Include="Glimpse\Tabs\Parts\Parts.cs" />
+    <Compile Include="Glimpse\Tabs\Cache\Cache.cs" />
+    <Compile Include="Models\Messages\SiteSettingMessage.cs" />
+    <Compile Include="Models\Messages\WidgetMessage.cs" />
+    <Compile Include="Glimpse\Tabs\Widgets\Widgets.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

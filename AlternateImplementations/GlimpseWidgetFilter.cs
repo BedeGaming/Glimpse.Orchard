@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Glimpse.Orchard.Models;
-using Glimpse.Orchard.PerfMon.Services;
-using Glimpse.Orchard.Tabs.Layers;
-using Glimpse.Orchard.Tabs.Widgets;
+using Glimpse.Orchard.Models.Messages;
+using Glimpse.Orchard.PerformanceMonitors;
 using Orchard;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Aspects;
