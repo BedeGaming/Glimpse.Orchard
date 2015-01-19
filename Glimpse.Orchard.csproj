@@ -134,6 +134,7 @@
     <Compile Include="Glimpse\Extensions\GlimpseMessageExtensions.cs" />
     <Compile Include="Filters\SiteSettingsFilter.cs" />
     <Compile Include="Filters\EnabledFeaturesFilter.cs" />
+    <Compile Include="Glimpse\Timers\GlimpsePerformanceTimer.cs" />
     <Compile Include="MessageBrokers\IPerformanceMessageBroker.cs" />
     <Compile Include="Glimpse\MessageBrokers\GlimpseMessageBroker.cs" />
     <Compile Include="Glimpse\Models\GlimpseMessage.cs" />
@@ -141,12 +142,11 @@
     <Compile Include="Models\PerfmonCategory.cs" />
     <Compile Include="Glimpse\Extensions\PerfmonCategoryExtensions.cs" />
     <Compile Include="Models\TimelineCategories.cs" />
-    <Compile Include="PerformanceMonitors\Extensions\GlimpseTimerResultExtensions.cs" />
+    <Compile Include="Glimpse\Extensions\GlimpseTimerResultExtensions.cs" />
     <Compile Include="PerformanceMonitors\Models\ITimedPerfMonMessage.cs" />
     <Compile Include="PerformanceMonitors\Models\TimedActionResult.cs" />
     <Compile Include="PerformanceMonitors\Models\TimerResult.cs" />
-    <Compile Include="PerformanceMonitors\NullPerformanceMonitor.cs" />
-    <Compile Include="Glimpse\PerformanceMonitors\GlimpsePerformanceMonitor.cs" />
+    <Compile Include="PerformanceMonitors\DefaultPerformanceMonitor.cs" />
     <Compile Include="PerformanceMonitors\IPerformanceMonitor.cs" />
     <Compile Include="Glimpse\SecurityPolicies\WhitelistedIpAddressesSecurityPolicy.cs" />
     <Compile Include="Models\Messages\AuthorizerMessage.cs" />
@@ -169,6 +169,7 @@
     <Compile Include="Models\Messages\SiteSettingMessage.cs" />
     <Compile Include="Models\Messages\WidgetMessage.cs" />
     <Compile Include="Glimpse\Tabs\Widgets\Widgets.cs" />
+    <Compile Include="Timers\IPerformanceTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

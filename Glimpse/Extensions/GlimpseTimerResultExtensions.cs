@@ -1,6 +1,6 @@
 ﻿using Glimpse.Orchard.PerformanceMonitors.Models;
 
-namespace Glimpse.Orchard.PerformanceMonitors.Extensions
+namespace Glimpse.Orchard.Glimpse.Extensions
 {
     public static class GlimpseTimerResultExtensions
     {
