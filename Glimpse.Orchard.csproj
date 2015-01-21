@@ -124,6 +124,7 @@
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlternateImplementations\AsyncGlimpseHostEnvironment.cs" />
     <Compile Include="AlternateImplementations\GlimpseAuthorizer.cs" />
     <Compile Include="AlternateImplementations\GlimpseContentManager.cs" />
     <Compile Include="AlternateImplementations\GlimpseContentFieldDriverCoordinator.cs" />
