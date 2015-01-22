@@ -139,21 +139,19 @@ namespace Glimpse.Orchard.AlternateImplementations
                 }
 
                 var scopedWidgetPart = widgetPart;
-                var widgetBuildDisplayTime = _performanceMonitor.Time(() => _orchardServices.ContentManager.BuildDisplay(scopedWidgetPart));
-                var widgetShape = widgetBuildDisplayTime.ActionResult;
+                var widgetShape = _performanceMonitor.PublishTimedAction(() => _orchardServices.ContentManager.BuildDisplay(scopedWidgetPart), (r, t) =>
+                    new WidgetMessage
+                    {
+                        Title = scopedWidgetPart.Title,
+                        Type = scopedWidgetPart.ContentItem.ContentType,
+                        Zone = scopedWidgetPart.Zone,
+                        Layer = scopedWidgetPart.LayerPart,
+                        Position = scopedWidgetPart.Position,
+                        TechnicalName = scopedWidgetPart.Name,
+                        Duration = t.Duration
+                    }, TimelineCategories.Widgets, string.Format("Build Display ({0})", scopedWidgetPart.ContentItem.ContentType), scopedWidgetPart.Title);
 
-                _performanceMonitor.PublishMessage(new WidgetMessage
-                {
-                    Title = widgetPart.Title,
-                    Type = widgetPart.ContentItem.ContentType,
-                    Zone = widgetPart.Zone,
-                    Layer = widgetPart.LayerPart,
-                    Position = widgetPart.Position,
-                    TechnicalName = widgetPart.Name,
-                    Duration = widgetBuildDisplayTime.TimerResult.Duration
-                });
-
-                zones[widgetPart.Record.Zone].Add(widgetShape, widgetPart.Record.Position);
+                zones[widgetPart.Record.Zone].Add(widgetShape.ActionResult, widgetPart.Record.Position);
             }
         }
 
