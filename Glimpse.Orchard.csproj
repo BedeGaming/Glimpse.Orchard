@@ -139,7 +139,6 @@
     <Compile Include="MessageBrokers\IPerformanceMessageBroker.cs" />
     <Compile Include="Glimpse\MessageBrokers\GlimpseMessageBroker.cs" />
     <Compile Include="Glimpse\Models\GlimpseMessage.cs" />
-    <Compile Include="Glimpse\Models\GlimpseTimelineMessage.cs" />
     <Compile Include="Models\PerfmonCategory.cs" />
     <Compile Include="Glimpse\Extensions\PerfmonCategoryExtensions.cs" />
     <Compile Include="Models\TimelineCategories.cs" />
