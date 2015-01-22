@@ -1,7 +1,7 @@
 ﻿using Glimpse.Orchard.Extensions;
 using Glimpse.Orchard.Models;
-using Glimpse.Orchard.PerfMon.Services;
-using Glimpse.Orchard.Tabs.Authorizer;
+using Glimpse.Orchard.Models.Messages;
+using Glimpse.Orchard.PerformanceMonitors;
 using Orchard;
 using Orchard.ContentManagement;
 using Orchard.Environment.Extensions;

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
-using Glimpse.Orchard.PerfMon.Services;
-using Glimpse.Orchard.Tabs.EnabledFeatures;
+using Glimpse.Orchard.Models.Messages;
+using Glimpse.Orchard.PerformanceMonitors;
 using Orchard.Environment.Extensions;
 using Orchard.Environment.Features;
 using Orchard.Mvc.Filters;
