@@ -1,4 +1,5 @@
 ﻿using Orchard.ContentManagement;
+using Orchard.Core.Settings.Models;
 using Orchard.Core.Title.Models;
 using Orchard.Users.Models;
 using Orchard.Widgets.Models;
@@ -14,6 +15,7 @@ namespace Glimpse.Orchard.Extensions
             if (content.Has<UserPart>()) { return content.As<UserPart>().UserName; }
             if (content.Has<WidgetPart>()) { return content.As<WidgetPart>().Title; }
             if (content.Has<LayerPart>()) { return content.As<LayerPart>().Name; }
+            if (content.Has<SiteSettingsPart>()) { return content.As<SiteSettingsPart>().SiteName; }
 
             return "Unknown";
         }
