@@ -2,7 +2,7 @@
 {
     public static class TimelineCategories
     {
-        public static PerfmonCategory Widgets = new PerfmonCategory("Widgets", "#3939AA", "#595980");
+        public static PerfmonCategory Widgets = new PerfmonCategory("Widgets", "#FF8300", "#FF8300");
         public static PerfmonCategory Layers = new PerfmonCategory("Layers", "#AA3939", "#805959");
         public static PerfmonCategory Shapes = new PerfmonCategory("Shapes", "#39AA39", "#598059");
         public static PerfmonCategory Fields = new PerfmonCategory("Fields", "#AAAA39", "#808059");
