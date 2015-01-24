@@ -1,0 +1,32 @@
+﻿@using System.Web.Mvc.Html
+@using Orchard.Mvc.Html
+@model Glimpse.Orchard.NewRelicInsights.Models.NewRelicInsightsSettingsPart
+
+<fieldset>
+    <legend>@T("New Relic Insights Settings")</legend>
+
+    <div>
+        @Html.LabelFor(m => m.AccountId, T("Account ID"))
+        @Html.TextBoxFor(m => m.AccountId)
+        <span class="hint">@T("Your New Relic account ID")</span>
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.InsertKey, T("Insert Key"))
+        @Html.TextBoxFor(m => m.InsertKey)
+        <span class="hint">@T("You will need to generate a key to allow you to insert events for the account you specified above. For more help, see <a href='https://docs.newrelic.com/docs/insights/new-relic-insights/adding-querying-data/inserting-custom-events-via-insights-api#register'>this article</a>")</span>
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.AppId, T("App ID"))
+        @Html.TextBoxFor(m => m.AppId)
+        <span class="hint">@T("(Optional) You can specify the ID of a New Relic application in order to tie the generated events to your selected application")</span>
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.BufferSize, T("Buffer Size"))
+        @Html.TextBoxFor(m => m.BufferSize)
+        <span class="hint">@T("The number of events to keep in memory before flushing to the New Relic API. New Relic impose a maximum limit of 1000 on this value")</span>
+    </div>
+
+</fieldset>

@@ -75,6 +75,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -121,7 +122,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlternateImplementations\AsyncGlimpseHostEnvironment.cs" />
@@ -143,6 +143,17 @@
     <Compile Include="Glimpse\Extensions\PerfmonCategoryExtensions.cs" />
     <Compile Include="Models\TimelineCategories.cs" />
     <Compile Include="Glimpse\Extensions\GlimpseTimerResultExtensions.cs" />
+    <Compile Include="NewRelicInsights\Drivers\NewRelicInsightsSettingsPartDriver.cs" />
+    <Compile Include="NewRelicInsights\Handlers\NewRelicInsightsSettingsPartHandler.cs" />
+    <Compile Include="NewRelicInsights\MessageTransformers\INewRelicInsightsMessageTransformer.cs" />
+    <Compile Include="NewRelicInsights\Migrations.cs" />
+    <Compile Include="NewRelicInsights\Models\NewRelicInsightsSettingsPartRecord.cs" />
+    <Compile Include="NewRelicInsights\Models\Messages\NewRelicInsightsMessage.cs" />
+    <Compile Include="NewRelicInsights\MessageBrokers\NewRelicInsightsMessageBroker.cs" />
+    <Compile Include="NewRelicInsights\MessageTransformers\NewRelicInsightsMessageTransformer.cs" />
+    <Compile Include="NewRelicInsights\Models\Messages\NewRelicWidgetMessage.cs" />
+    <Compile Include="NewRelicInsights\MessageTransformers\WidgetMessageTransformer.cs" />
+    <Compile Include="NewRelicInsights\Models\NewRelicInsightsSettingsPart.cs" />
     <Compile Include="PerformanceMonitors\Models\ITimedPerfMonMessage.cs" />
     <Compile Include="PerformanceMonitors\Models\TimedActionResult.cs" />
     <Compile Include="PerformanceMonitors\Models\TimerResult.cs" />
@@ -173,6 +184,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts\NewRelicInsightsSettingsPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Placement.info" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
