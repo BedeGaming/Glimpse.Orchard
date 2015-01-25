@@ -1,4 +1,5 @@
-﻿namespace Glimpse.Orchard.NewRelicInsights.Models.Mesages {
+﻿namespace Glimpse.Orchard.NewRelicInsights.Models.Messages 
+{
     public class NewRelicWidgetMessage : NewRelicInsightsMessage
     {
         public string WidgetName { get; set; }

@@ -1,6 +1,6 @@
 ﻿using Glimpse.Orchard.Models.Messages;
 using Glimpse.Orchard.NewRelicInsights.Models;
-using Glimpse.Orchard.NewRelicInsights.Models.Mesages;
+using Glimpse.Orchard.NewRelicInsights.Models.Messages;
 
 namespace Glimpse.Orchard.NewRelicInsights.MessageTransformers {
     public class WidgetMessageTransformer : NewRelicInsightsMessageTransformer<WidgetMessage>

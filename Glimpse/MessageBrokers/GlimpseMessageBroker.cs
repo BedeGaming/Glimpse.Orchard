@@ -39,16 +39,6 @@ namespace Glimpse.Orchard.Glimpse.MessageBrokers {
             _messageBroker.Value.Publish(wrappedMessage);
         }
 
-        public Guid Subscribe<T>(Action<T> action)
-        {
-            return  _messageBroker.Value.Subscribe(action);
-        }
-
-        public void Unsubscribe<T>(Guid subscriptionId)
-        {
-            _messageBroker.Value.Unsubscribe<T>(subscriptionId);
-        }
-
         public class NullMessageBroker : IMessageBroker
         {
             public void Publish<T>(T message) { }

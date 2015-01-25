@@ -143,11 +143,7 @@
     <Compile Include="Glimpse\Extensions\PerfmonCategoryExtensions.cs" />
     <Compile Include="Models\TimelineCategories.cs" />
     <Compile Include="Glimpse\Extensions\GlimpseTimerResultExtensions.cs" />
-    <Compile Include="NewRelicInsights\Drivers\NewRelicInsightsSettingsPartDriver.cs" />
-    <Compile Include="NewRelicInsights\Handlers\NewRelicInsightsSettingsPartHandler.cs" />
     <Compile Include="NewRelicInsights\MessageTransformers\INewRelicInsightsMessageTransformer.cs" />
-    <Compile Include="NewRelicInsights\Migrations.cs" />
-    <Compile Include="NewRelicInsights\Models\NewRelicInsightsSettingsPartRecord.cs" />
     <Compile Include="NewRelicInsights\Models\Messages\NewRelicInsightsMessage.cs" />
     <Compile Include="NewRelicInsights\MessageBrokers\NewRelicInsightsMessageBroker.cs" />
     <Compile Include="NewRelicInsights\MessageTransformers\NewRelicInsightsMessageTransformer.cs" />

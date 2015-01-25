@@ -1,5 +1,5 @@
 ﻿using Glimpse.Orchard.NewRelicInsights.Models;
-using Glimpse.Orchard.NewRelicInsights.Models.Mesages;
+using Glimpse.Orchard.NewRelicInsights.Models.Messages;
 using Orchard;
 
 namespace Glimpse.Orchard.NewRelicInsights.MessageTransformers {
