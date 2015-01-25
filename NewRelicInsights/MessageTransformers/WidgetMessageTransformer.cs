@@ -1,8 +1,10 @@
 ﻿using Glimpse.Orchard.Models.Messages;
-using Glimpse.Orchard.NewRelicInsights.Models;
 using Glimpse.Orchard.NewRelicInsights.Models.Messages;
+using Orchard.Environment.Extensions;
 
-namespace Glimpse.Orchard.NewRelicInsights.MessageTransformers {
+namespace Glimpse.Orchard.NewRelicInsights.MessageTransformers 
+{
+    [OrchardFeature("Glimpse.Orchard.NewRelicInsights")]
     public class WidgetMessageTransformer : NewRelicInsightsMessageTransformer<WidgetMessage>
     {
         public override string EventName

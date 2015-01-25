@@ -8,12 +8,13 @@ using Glimpse.Orchard.MessageBrokers;
 using Glimpse.Orchard.NewRelicInsights.MessageTransformers;
 using Glimpse.Orchard.NewRelicInsights.Models;
 using Orchard;
-using Orchard.ContentManagement;
 using Orchard.Core.Common.Utilities;
 using Orchard.Environment.Configuration;
+using Orchard.Environment.Extensions;
 
 namespace Glimpse.Orchard.NewRelicInsights.MessageBrokers
 {
+    [OrchardFeature("Glimpse.Orchard.NewRelicInsights")]
     public class NewRelicInsightsMessageBroker : IPerformanceMessageBroker, ISingletonDependency
     {
         private readonly ShellSettings _shellSettings;

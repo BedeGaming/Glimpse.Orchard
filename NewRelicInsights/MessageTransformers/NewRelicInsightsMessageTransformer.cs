@@ -1,7 +1,9 @@
 using Glimpse.Orchard.NewRelicInsights.Models.Messages;
+using Orchard.Environment.Extensions;
 
-namespace Glimpse.Orchard.NewRelicInsights.MessageTransformers 
+namespace Glimpse.Orchard.NewRelicInsights.MessageTransformers
 {
+    [OrchardFeature("Glimpse.Orchard.NewRelicInsights")]
     public abstract class NewRelicInsightsMessageTransformer<T> : INewRelicInsightsMessageTransformer where T: class 
     {
         public NewRelicInsightsMessage TransformMessage(object message)

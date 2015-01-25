@@ -144,9 +144,15 @@
     <Compile Include="Models\TimelineCategories.cs" />
     <Compile Include="Glimpse\Extensions\GlimpseTimerResultExtensions.cs" />
     <Compile Include="NewRelicInsights\MessageTransformers\INewRelicInsightsMessageTransformer.cs" />
+    <Compile Include="NewRelicInsights\MessageTransformers\CacheMessageTransformer.cs" />
+    <Compile Include="NewRelicInsights\MessageTransformers\ContentManagerMessageTransformer.cs" />
+    <Compile Include="NewRelicInsights\MessageTransformers\LayerMessageTransformer.cs" />
     <Compile Include="NewRelicInsights\Models\Messages\NewRelicInsightsMessage.cs" />
     <Compile Include="NewRelicInsights\MessageBrokers\NewRelicInsightsMessageBroker.cs" />
     <Compile Include="NewRelicInsights\MessageTransformers\NewRelicInsightsMessageTransformer.cs" />
+    <Compile Include="NewRelicInsights\Models\Messages\NewRelicContentManagerMessage.cs" />
+    <Compile Include="NewRelicInsights\Models\Messages\NewRelicCacheMessage.cs" />
+    <Compile Include="NewRelicInsights\Models\Messages\NewRelicLayerMessage.cs" />
     <Compile Include="NewRelicInsights\Models\Messages\NewRelicWidgetMessage.cs" />
     <Compile Include="NewRelicInsights\MessageTransformers\WidgetMessageTransformer.cs" />
     <Compile Include="NewRelicInsights\Models\NewRelicInsightsSettingsPart.cs" />
