@@ -14,10 +14,10 @@ namespace Glimpse.Orchard.PerformanceMonitors
 {
     public class DefaultPerformanceMonitor : IPerformanceMonitor
     {
-        private readonly IEnumerable<IPerformanceMessageBroker> _messageBrokers;
+        private readonly Lazy<IEnumerable<IPerformanceMessageBroker>> _messageBrokers;
         private readonly IPerformanceTimer _performanceTimer;
 
-        public DefaultPerformanceMonitor(IEnumerable<IPerformanceMessageBroker> messageBrokers, IPerformanceTimer performanceTimer)
+        public DefaultPerformanceMonitor(Lazy<IEnumerable<IPerformanceMessageBroker>> messageBrokers, IPerformanceTimer performanceTimer)
         {
             _messageBrokers = messageBrokers;
             _performanceTimer = performanceTimer;
@@ -95,7 +95,7 @@ namespace Glimpse.Orchard.PerformanceMonitors
 
         public void PublishMessage<T>(T message)
         {
-            _messageBrokers.Invoke(broker =>broker.Publish(message), Logger);
+            _messageBrokers.Value.Invoke(broker =>broker.Publish(message), Logger);
         }
     }
 }
