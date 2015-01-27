@@ -54,7 +54,7 @@ namespace Glimpse.Orchard.AlternateImplementations
             return Get(id, options, QueryHints.Empty);
         }
 
-        public new ContentItem Get(int id, VersionOptions options, QueryHints hints)
+        public override ContentItem Get(int id, VersionOptions options, QueryHints hints)
         {
             return _performanceMonitor.PublishTimedAction(() => base.Get(id, options, hints), (r, t) => new ContentManagerMessage
             {
