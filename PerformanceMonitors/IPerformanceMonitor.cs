@@ -23,7 +23,7 @@ namespace Glimpse.Orchard.PerformanceMonitors
         TimedActionResult<T> Time<T>(Func<T> action);
 
         TimerResult PublishTimedAction(Action action, PerfmonCategory category, string eventName, string eventSubText = null);
-        TimerResult PublishTimedAction<T>(Action action, Func<T> messageFactory, PerfmonCategory category, string eventName, string eventSubText = null);
+        TimerResult PublishTimedAction<T>(Action action, Func<TimerResult, T> messageFactory, PerfmonCategory category, string eventName, string eventSubText = null);
         TimedActionResult<T> PublishTimedAction<T>(Func<T> action, PerfmonCategory category, string eventName, string eventSubText = null);
         TimedActionResult<T> PublishTimedAction<T>(Func<T> action, PerfmonCategory category, Func<T, string> eventNameFactory, Func<T, string> eventSubTextFactory = null);
         TimedActionResult<T> PublishTimedAction<T, TMessage>(Func<T> action, Func<T, TimerResult, TMessage> messageFactory, PerfmonCategory category, string eventName, string eventSubText = null);

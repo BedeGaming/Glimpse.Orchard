@@ -9,5 +9,6 @@
         public static PerfmonCategory Parts = new PerfmonCategory("Parts", "#6A4A3C", "#6A4A3C");
         public static PerfmonCategory ContentManagement = new PerfmonCategory("Content Manager", "#AA39AA", "#AA39AA");
         public static PerfmonCategory Authorization = new PerfmonCategory("Authorization", "#EB6841", "#EB6841");
+        public static PerfmonCategory Cache = new PerfmonCategory("Cache", "#393B79", "#393B79");
     }
 }

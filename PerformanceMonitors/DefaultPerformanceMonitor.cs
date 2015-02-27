@@ -46,10 +46,10 @@ namespace Glimpse.Orchard.PerformanceMonitors
             return timedResult;
         }
 
-        public TimerResult PublishTimedAction<T>(Action action, Func<T> messageFactory, PerfmonCategory category, string eventName, string eventSubText = null)
+        public TimerResult PublishTimedAction<T>(Action action, Func<TimerResult, T> messageFactory, PerfmonCategory category, string eventName, string eventSubText = null)
         {
             var timedResult = PublishTimedAction(action, category, eventName, eventSubText);
-            PublishMessage(messageFactory());
+            PublishMessage(messageFactory(timedResult));
 
             return timedResult;
         }
