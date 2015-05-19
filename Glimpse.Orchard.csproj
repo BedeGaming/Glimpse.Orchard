@@ -56,10 +56,6 @@
     <Reference Include="Autofac.Integration.Web">
       <HintPath>..\..\..\..\lib\autofac\Autofac.Integration.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Glimpse.AspNet, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Glimpse.AspNet.1.9.1\lib\net45\Glimpse.AspNet.dll</HintPath>
-    </Reference>
     <Reference Include="Glimpse.Core, Version=1.8.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
