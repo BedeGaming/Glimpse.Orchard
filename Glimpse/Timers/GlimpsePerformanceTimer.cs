@@ -56,7 +56,14 @@ namespace Glimpse.Orchard.Glimpse.Timers
                 return null;
             }
 
-            return ((GlimpseRuntime)context.Application.Get("__GlimpseRuntime")).Configuration.TimerStrategy.Invoke();
+            var glimpseRuntime = ((GlimpseRuntime) context.Application.Get("__GlimpseRuntime"));
+
+            if (glimpseRuntime == null)
+            {
+                return null;
+            }
+
+            return glimpseRuntime.Configuration.TimerStrategy.Invoke();
         }
     }
 }
