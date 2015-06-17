@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Glimpse.Orchard.Models;
 using Glimpse.Orchard.Models.Messages;
@@ -26,23 +27,24 @@ namespace Glimpse.Orchard.AlternateImplementations
     public class GlimpseWidgetFilter : FilterProvider, IResultFilter
     {
         private readonly IWorkContextAccessor _workContextAccessor;
-        private readonly IRuleManager _ruleManager;
         private readonly IWidgetsService _widgetsService;
         private readonly IOrchardServices _orchardServices;
         private readonly IPerformanceMonitor _performanceMonitor;
+        private readonly ILayerEvaluationService _layerEvaluationService;
 
         public GlimpseWidgetFilter(
             IWorkContextAccessor workContextAccessor,
-            IRuleManager ruleManager,
             IWidgetsService widgetsService,
             IOrchardServices orchardServices,
-            IPerformanceMonitor performanceMonitor)
+            IPerformanceMonitor performanceMonitor, 
+            ILayerEvaluationService layerEvaluationService)
         {
             _workContextAccessor = workContextAccessor;
-            _ruleManager = ruleManager;
             _widgetsService = widgetsService;
             _orchardServices = orchardServices;
             _performanceMonitor = performanceMonitor;
+            _layerEvaluationService = layerEvaluationService;
+
             Logger = NullLogger.Instance;
             T = NullLocalizer.Instance;
         }
@@ -68,37 +70,7 @@ namespace Glimpse.Orchard.AlternateImplementations
                 return;
             }
 
-            // Once the Rule Engine is done:
-            // Get Layers and filter by zone and rule
-            IEnumerable<LayerPart> activeLayers = _orchardServices.ContentManager.Query<LayerPart, LayerPartRecord>().List();
-
-            var activeLayerIds = new List<int>();
-            foreach (var activeLayer in activeLayers)
-            {
-                // ignore the rule if it fails to execute
-                try
-                {
-                    var currentLayer = activeLayer;
-                    var layerRuleMatches = _performanceMonitor.PublishTimedAction(() => _ruleManager.Matches(currentLayer.Record.LayerRule), (r, t) => new LayerMessage
-                    {
-                        Active = r,
-                        Name = currentLayer.Record.Name,
-                        Rule = currentLayer.Record.LayerRule,
-                        Duration = t.Duration
-                    }, TimelineCategories.Layers, "Layer Evaluation", currentLayer.Record.Name).ActionResult;
-
-                    if (layerRuleMatches)
-                    {
-                        activeLayerIds.Add(activeLayer.ContentItem.Id);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Logger.Warning(e, T("An error occured during layer evaluation on: {0}", activeLayer.Name).Text);
-                }
-            }
-
-            IEnumerable<WidgetPart> widgetParts = _widgetsService.GetWidgets(layerIds: activeLayerIds.ToArray());
+            IEnumerable<WidgetPart> widgetParts = _widgetsService.GetWidgets(_layerEvaluationService.GetActiveLayerIds().ToArray());
 
             // Build and add shape to zone.
             var zones = workContext.Layout.Zones;
