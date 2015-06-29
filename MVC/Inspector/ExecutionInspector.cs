@@ -18,7 +18,7 @@ namespace Glimpse.Mvc.Inspector
             {
                 ControllerBuilder.Current.SetControllerFactory(newControllerFactory);
 
-                logger.Debug(Resources.ControllerFactorySetup, originalControllerFactory.GetType());
+                logger.Debug("Proxied IControllerFactory of type '{0}'.", originalControllerFactory.GetType());
             }
         }
     }

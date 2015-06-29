@@ -248,6 +248,9 @@
   <ItemGroup>
     <Content Include="Placement.info" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

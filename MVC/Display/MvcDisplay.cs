@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web.Routing;
 using Glimpse.AspNet.AlternateType;
 using Glimpse.Core.Extensibility;
 using Glimpse.Core.Extensions;

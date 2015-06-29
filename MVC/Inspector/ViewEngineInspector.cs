@@ -21,11 +21,11 @@ namespace Glimpse.Mvc.Inspector
                 if (alternateImplementation.TryCreate(originalEngine, out newEngine))
                 {
                     currentEngines[i] = newEngine;
-                    logger.Info(Resources.ViewEngineSetupReplacedViewEngine, originalEngine.GetType());
+                    logger.Info("Replaced IViewEngine of type '{0}' with proxy implementation.", originalEngine.GetType());
                 }
                 else
                 {
-                    logger.Warn(Resources.ViewEngineSetupNotReplacedViewEngine, originalEngine.GetType()); 
+                    logger.Warn("Couldn't replace IViewEngine of type '{0}' with proxy implementation.", originalEngine.GetType()); 
                 }
             }
         }

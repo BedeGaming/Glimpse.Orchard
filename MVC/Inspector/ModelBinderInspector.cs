@@ -33,7 +33,7 @@ namespace Glimpse.Mvc.Inspector
 
                 if (alternateModelBinderProvider.TryCreate(originalBinder, out newProvider))
                 {
-                    context.Logger.Info(Resources.ModelBinderInspectorSetupReplacedModelBinderProvider, originalBinder.GetType());
+                    context.Logger.Info("Replaced IModelBinder of type '{0}' with proxy implementation.", originalBinder.GetType());
                     binderProviders[i] = newProvider;
                 }
             }
@@ -57,7 +57,7 @@ namespace Glimpse.Mvc.Inspector
 
                 if (alternateValueProviderFactory.TryCreate(originalFactory, out newFactory))
                 {
-                    context.Logger.Info(Resources.ModelBinderInspectorSetupReplacedValueProviderFactory, originalFactory.GetType());
+                    context.Logger.Info("Replaced IModelBinder of type '{0}' with proxy implementation.", originalFactory.GetType());
                     factories[i] = newFactory;
                 }
             }
@@ -77,7 +77,7 @@ namespace Glimpse.Mvc.Inspector
 
                 if (alternateModelBinder.TryCreate(originalBinder, out newBinder))
                 {
-                    context.Logger.Info(Resources.ModelBinderInspectorSetupReplacedModelBinder, originalBinder.GetType());
+                    context.Logger.Info("Replaced IModelBinder of type '{0}' with proxy implementation.", originalBinder.GetType());
                     binders[type] = newBinder;
                 }
             }
@@ -87,7 +87,7 @@ namespace Glimpse.Mvc.Inspector
             IModelBinder newDefaultBinder;
             if (originalDefaultBinder != null && alternateModelBinder.TryCreate(originalDefaultBinder, out newDefaultBinder))
             {
-                context.Logger.Info(Resources.ModelBinderInspectorSetupReplacedModelBinder, originalDefaultBinder.GetType());
+                context.Logger.Info("Replaced IModelBinder of type '{0}' with proxy implementation.", originalDefaultBinder.GetType());
                 ModelBinders.Binders.DefaultBinder = newDefaultBinder;
             }
         }

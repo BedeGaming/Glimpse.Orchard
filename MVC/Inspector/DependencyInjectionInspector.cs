@@ -18,11 +18,11 @@ namespace Glimpse.Mvc.Inspector
             {
                 DependencyResolver.SetResolver(newResolver);
 
-                logger.Debug(Resources.DependencyResolverSetupReplacedDependencyResolver, dependencyResolver.GetType());
+                logger.Debug("Replaced IDependencyResolver of type '{0}' with proxy implementation.", dependencyResolver.GetType());
             }
             else
             {
-                logger.Warn(Resources.DependencyResolverSetupNotReplacedDependencyResolver, dependencyResolver.GetType());
+                logger.Warn("Couldn't replace IDependencyResolver of type '{0}' with proxy implementation.", dependencyResolver.GetType());
             }
         }
     }
