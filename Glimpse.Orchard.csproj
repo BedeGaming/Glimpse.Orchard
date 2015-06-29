@@ -56,6 +56,10 @@
     <Reference Include="Autofac.Integration.Web">
       <HintPath>..\..\..\..\lib\autofac\Autofac.Integration.Web.dll</HintPath>
     </Reference>
+    <Reference Include="Glimpse.AspNet, Version=1.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Glimpse.AspNet.1.9.2\lib\net45\Glimpse.AspNet.dll</HintPath>
+    </Reference>
     <Reference Include="Glimpse.Core, Version=1.8.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
@@ -129,6 +133,7 @@
     <Compile Include="AlternateImplementations\GlimpseDisplayManager.cs" />
     <Compile Include="AlternateImplementations\GlimpseWidgetFilter.cs" />
     <Compile Include="Extensions\ContentExtensions.cs" />
+    <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Glimpse\Extensions\GlimpseMessageExtensions.cs" />
     <Compile Include="Filters\SiteSettingsFilter.cs" />
     <Compile Include="Filters\EnabledFeaturesFilter.cs" />
@@ -140,6 +145,59 @@
     <Compile Include="Glimpse\Extensions\PerfmonCategoryExtensions.cs" />
     <Compile Include="Models\TimelineCategories.cs" />
     <Compile Include="Glimpse\Extensions\GlimpseTimerResultExtensions.cs" />
+    <Compile Include="MVC\AlternateType\ActionFilter.cs" />
+    <Compile Include="MVC\AlternateType\ActionInvoker.cs" />
+    <Compile Include="MVC\AlternateType\ActionInvokerStateMixin.cs" />
+    <Compile Include="MVC\AlternateType\AsyncActionInvoker.cs" />
+    <Compile Include="MVC\AlternateType\AuthorizationFilter.cs" />
+    <Compile Include="MVC\AlternateType\ControllerFactory.cs" />
+    <Compile Include="MVC\AlternateType\DependencyResolver.cs" />
+    <Compile Include="MVC\AlternateType\ExceptionFilter.cs" />
+    <Compile Include="MVC\AlternateType\ModelBinder.cs" />
+    <Compile Include="MVC\AlternateType\ModelBinderProvider.cs" />
+    <Compile Include="MVC\AlternateType\ResultFilter.cs" />
+    <Compile Include="MVC\AlternateType\ValueProvider.cs" />
+    <Compile Include="MVC\AlternateType\ValueProviderFactory.cs" />
+    <Compile Include="MVC\AlternateType\View.cs" />
+    <Compile Include="MVC\AlternateType\ViewCorrelationMixin.cs" />
+    <Compile Include="MVC\AlternateType\ViewEngine.cs" />
+    <Compile Include="MVC\Display\MvcDisplay.cs" />
+    <Compile Include="MVC\Html\HtmlHelperExtension.cs" />
+    <Compile Include="MVC\Inspector\DependencyInjectionInspector.cs" />
+    <Compile Include="MVC\Inspector\ExecutionInspector.cs" />
+    <Compile Include="MVC\Inspector\ModelBinderInspector.cs" />
+    <Compile Include="MVC\Inspector\ViewEngineInspector.cs" />
+    <Compile Include="MVC\Message\FilterBounds.cs" />
+    <Compile Include="MVC\Message\FilterCategory.cs" />
+    <Compile Include="MVC\Message\IActionMessage.cs" />
+    <Compile Include="MVC\Message\IBoundedFilterMessage.cs" />
+    <Compile Include="MVC\Message\ICanceledFilterMessage.cs" />
+    <Compile Include="MVC\Message\IChildActionMessage.cs" />
+    <Compile Include="MVC\Message\IExceptionFilterMessage.cs" />
+    <Compile Include="MVC\Message\IExecutionMessage.cs" />
+    <Compile Include="MVC\Message\IFilterMessage.cs" />
+    <Compile Include="MVC\Message\IInvokeActionResultMessage.cs" />
+    <Compile Include="MVC\Message\MvcTimelineCategory.cs" />
+    <Compile Include="MVC\Message\MvcTimelineExtension.cs" />
+    <Compile Include="MVC\Model\DefaultValueModel.cs" />
+    <Compile Include="MVC\Model\ExecutionModel.cs" />
+    <Compile Include="MVC\Model\MetadataContentModel.cs" />
+    <Compile Include="MVC\Model\MetadataItemModel.cs" />
+    <Compile Include="MVC\Model\MetadataPropertyItemModel.cs" />
+    <Compile Include="MVC\Model\ModelBindingModel.cs" />
+    <Compile Include="MVC\Model\MvcDisplayModel.cs" />
+    <Compile Include="MVC\Model\ViewModelSummary.cs" />
+    <Compile Include="MVC\Model\ViewsModel.cs" />
+    <Compile Include="MVC\SerializationConverter\CultureConverter.cs" />
+    <Compile Include="MVC\SerializationConverter\ListOfExecutionModelConverter.cs" />
+    <Compile Include="MVC\SerializationConverter\ListOfMetadataItemModelConverter.cs" />
+    <Compile Include="MVC\SerializationConverter\ListOfViewsModelConverter.cs" />
+    <Compile Include="MVC\SerializationConverter\MvcDisplayModelConverter.cs" />
+    <Compile Include="MVC\SerializationConverter\UrlParameterConverter.cs" />
+    <Compile Include="MVC\Tab\Execution.cs" />
+    <Compile Include="MVC\Tab\Metadata.cs" />
+    <Compile Include="MVC\Tab\ModelBinding.cs" />
+    <Compile Include="MVC\Tab\Views.cs" />
     <Compile Include="NewRelicInsights\MessageTransformers\INewRelicInsightsMessageTransformer.cs" />
     <Compile Include="NewRelicInsights\MessageTransformers\CacheMessageTransformer.cs" />
     <Compile Include="NewRelicInsights\MessageTransformers\ContentManagerMessageTransformer.cs" />
