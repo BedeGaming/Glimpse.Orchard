@@ -34,7 +34,7 @@ namespace Glimpse.Orchard.AlternateImplementations
         public ILogger Logger { get; set; }
         public Localizer T { get; private set; }
 
-        public IEnumerable<int> GetActiveLayerIds()
+        public int[] GetActiveLayerIds()
         {
             // Once the Rule Engine is done:
             // Get Layers and filter by zone and rule
@@ -67,7 +67,7 @@ namespace Glimpse.Orchard.AlternateImplementations
                 }
             }
 
-            return activeLayerIds;
+            return activeLayerIds.ToArray();
         }
     }
 }
