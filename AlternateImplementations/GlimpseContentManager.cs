@@ -32,14 +32,14 @@ namespace Glimpse.Orchard.AlternateImplementations
             ICacheManager cacheManager,
             Func<IContentManagerSession> contentManagerSession,
             Lazy<IContentDisplay> contentDisplay,
-            Lazy<ISessionLocator> sessionLocator,
+            Lazy<ITransactionManager> transactionManager,
             Lazy<IEnumerable<IContentHandler>> handlers,
             Lazy<IEnumerable<IIdentityResolverSelector>> identityResolverSelectors,
             Lazy<IEnumerable<ISqlStatementProvider>> sqlStatementProviders,
             ShellSettings shellSettings,
             ISignals signals,
             IPerformanceMonitor performanceMonitor)
-            : base(context, contentTypeRepository, contentItemRepository, contentItemVersionRepository, contentDefinitionManager, cacheManager, contentManagerSession, contentDisplay, sessionLocator, handlers, identityResolverSelectors, sqlStatementProviders, shellSettings, signals)
+            : base(context, contentTypeRepository, contentItemRepository, contentItemVersionRepository, contentDefinitionManager, cacheManager, contentManagerSession, contentDisplay, transactionManager, handlers, identityResolverSelectors, sqlStatementProviders, shellSettings, signals)
         {
             _performanceMonitor = performanceMonitor;
         }
