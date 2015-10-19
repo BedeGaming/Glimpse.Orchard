@@ -59,7 +59,7 @@
     </Reference>
     <Reference Include="FluentNHibernate, Version=1.4.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Orchard\lib\nhibernate\FluentNHibernate.dll</HintPath>
+      <HintPath>..\..\..\..\lib\nhibernate\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
