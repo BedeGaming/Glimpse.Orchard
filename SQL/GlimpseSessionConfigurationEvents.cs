@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
+using NHibernate.AdoNet;
 using NHibernate.Cfg;
 using Orchard.Data;
 using Orchard.Environment.Extensions;
@@ -18,7 +19,9 @@ namespace Glimpse.Orchard.SQL
 
         public void Finished(Configuration cfg)
         {
-            cfg.SetProperty("connection.provider", "Glimpse.Orchard.SQL.GlimpseConnectionProvider, Glimpse.Orchard");
+            cfg.SetProperty(Environment.ConnectionProvider, "Glimpse.Orchard.SQL.GlimpseConnectionProvider, Glimpse.Orchard");
+            cfg.SetProperty(Environment.BatchStrategy, typeof(NonBatchingBatcherFactory).FullName);
+            cfg.SetProperty(Environment.FormatSql, "true");
         }
 
         public void ComputingHash(Hash hash) { }
