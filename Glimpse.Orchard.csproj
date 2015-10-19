@@ -26,6 +26,7 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +57,14 @@
     <Reference Include="Autofac.Integration.Web">
       <HintPath>..\..\..\..\lib\autofac\Autofac.Integration.Web.dll</HintPath>
     </Reference>
+    <Reference Include="FluentNHibernate, Version=1.4.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Orchard\lib\nhibernate\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Glimpse.AspNet, Version=1.9.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Glimpse.AspNet.1.9.2\lib\net45\Glimpse.AspNet.dll</HintPath>
@@ -68,6 +77,10 @@
     <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\nhibernate\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Glimpse, Version=3.3.3.4001, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NHibernate.Glimpse.3.3.3.40011\lib\net35\NHibernate.Glimpse.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -237,6 +250,9 @@
     <Compile Include="Models\Messages\SiteSettingMessage.cs" />
     <Compile Include="Models\Messages\WidgetMessage.cs" />
     <Compile Include="Glimpse\Tabs\Widgets\Widgets.cs" />
+    <Compile Include="SQL\GlimpseSessionConfigurationEvents.cs" />
+    <Compile Include="SQL\GlimpseDriver.cs" />
+    <Compile Include="SQL\GlimpseConnectionProvider.cs" />
     <Compile Include="Timers\IPerformanceTimer.cs" />
   </ItemGroup>
   <ItemGroup>
