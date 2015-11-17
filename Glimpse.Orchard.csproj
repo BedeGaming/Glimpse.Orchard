@@ -111,6 +111,10 @@
       <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
       <Name>Orchard.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard.Layouts\Orchard.Layouts.csproj">
+      <Project>{6bd8b2fa-f2e3-4ac8-a4c3-2925a653889a}</Project>
+      <Name>Orchard.Layouts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Orchard.Users\Orchard.Users.csproj">
       <Project>{79AED36E-ABD0-4747-93D3-8722B042454B}</Project>
       <Name>Orchard.Users</Name>
@@ -125,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlternateImplementations\AsyncGlimpseHostEnvironment.cs" />
+    <Compile Include="AlternateImplementations\GlimpseElementDisplay.cs" />
     <Compile Include="AlternateImplementations\GlimpseLayerEvaluationService.cs" />
     <Compile Include="AlternateImplementations\GlimpseAuthorizer.cs" />
     <Compile Include="AlternateImplementations\GlimpseContentManager.cs" />
@@ -137,10 +142,12 @@
     <Compile Include="Glimpse\Extensions\GlimpseMessageExtensions.cs" />
     <Compile Include="Filters\SiteSettingsFilter.cs" />
     <Compile Include="Filters\EnabledFeaturesFilter.cs" />
+    <Compile Include="Glimpse\Tabs\Layouts\Layouts.cs" />
     <Compile Include="Glimpse\Timers\GlimpsePerformanceTimer.cs" />
     <Compile Include="MessageBrokers\IPerformanceMessageBroker.cs" />
     <Compile Include="Glimpse\MessageBrokers\GlimpseMessageBroker.cs" />
     <Compile Include="Glimpse\Models\GlimpseMessage.cs" />
+    <Compile Include="Models\Messages\ElementMessage.cs" />
     <Compile Include="Models\PerfmonCategory.cs" />
     <Compile Include="Glimpse\Extensions\PerfmonCategoryExtensions.cs" />
     <Compile Include="Models\TimelineCategories.cs" />

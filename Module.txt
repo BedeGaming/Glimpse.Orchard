@@ -40,6 +40,11 @@ Features:
 		Name: Glimpse for Orchard Enabled Features
         Description: Populates the 'Enabled Features' tab of your Glimpse plugin with a list of the currently enabled features.
 		Dependencies: Glimpse.Orchard
+    Glimpse.Orchard.Layouts:
+		Category: Glimpse
+		Name: Glimpse for Orchard Layouts
+        Description: Adds detailed information about the performance and results of Layouts, as well as information about the Elements that have been rendered to your Glimpse plugin.
+		Dependencies: Glimpse.Orchard, Orchard.Layouts
     Glimpse.Orchard.SiteSettings:
 		Category: Glimpse
 		Name: Glimpse for Orchard Site Settings
