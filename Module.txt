@@ -50,6 +50,11 @@ Features:
 		Name: Glimpse for Orchard Site Settings
         Description: Populates the 'Site Settings' tab of your Glimpse plugin with the values of each of this site's settings.
 		Dependencies: Glimpse.Orchard
+    Glimpse.Orchard.SQL:
+		Category: Glimpse
+		Name: Glimpse for Orchard SQL
+        Description: Instruments SQL commands and connections.
+		Dependencies: Glimpse.Orchard
     Glimpse.Orchard.NewRelicInsights:
 		Category: Glimpse
 		Name: New Relic Insights broker

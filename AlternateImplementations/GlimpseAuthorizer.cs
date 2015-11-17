@@ -47,7 +47,15 @@ namespace Glimpse.Orchard.AlternateImplementations {
                 authorizerMessage.ContentName = content.GetContentName();
             }
 
-            return _performanceMonitor.PublishTimedAction(() => base.Authorize(permission, content, message), (r, t) => { 
+            return _performanceMonitor.PublishTimedAction(() =>
+            {
+                if (permission == StandardPermissions.AccessFrontEnd)
+                {
+                    return true;
+                }
+
+                return base.Authorize(permission, content, message);
+            }, (r, t) => { 
                 authorizerMessage.Duration = t.Duration;
                 authorizerMessage.UserIsAuthorized = r;
 

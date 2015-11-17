@@ -90,7 +90,7 @@ Orchard.Azure/Orchard.Azure.CloudService/Staging
 AppPackages/
 
 # Others
-sql
+#sql
 TestResults
 [Tt]est[Rr]esult*
 *.Cache
