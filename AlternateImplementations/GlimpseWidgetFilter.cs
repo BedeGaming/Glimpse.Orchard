@@ -59,7 +59,7 @@ namespace Glimpse.Orchard.AlternateImplementations
             if (viewResult == null)
                 return;
 
-            var workContext = _workContextAccessor.GetContext(filterContext);
+            var workContext = _workContextAccessor.GetContext(filterContext.HttpContext);
 
             if (workContext == null ||
                 workContext.Layout == null ||
