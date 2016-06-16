@@ -10,6 +10,7 @@ using Orchard.Localization;
 using Orchard.Logging;
 using Orchard.Widgets.Models;
 using Orchard.Widgets.Services;
+using Orchard.Conditions.Services;
 
 namespace Glimpse.Orchard.AlternateImplementations
 {
@@ -17,13 +18,13 @@ namespace Glimpse.Orchard.AlternateImplementations
     [OrchardSuppressDependency("Orchard.Widgets.Services.DefaultLayerEvaluationService")]
     public class GlimpseLayerEvaluationService : ILayerEvaluationService
     {
-        private readonly IRuleManager _ruleManager;
+        private readonly IConditionManager _conditionManager;
         private readonly IOrchardServices _orchardServices;
         private readonly IPerformanceMonitor _performanceMonitor;
 
-        public GlimpseLayerEvaluationService(IRuleManager ruleManager, IPerformanceMonitor performanceMonitor, IOrchardServices orchardServices)
+        public GlimpseLayerEvaluationService(IConditionManager conditionManager, IPerformanceMonitor performanceMonitor, IOrchardServices orchardServices)
         {
-            _ruleManager = ruleManager;
+            _conditionManager = conditionManager;
             _performanceMonitor = performanceMonitor;
             _orchardServices = orchardServices;
 
@@ -48,7 +49,7 @@ namespace Glimpse.Orchard.AlternateImplementations
                 try
                 {
                     var currentLayer = activeLayer;
-                    var layerRuleMatches = _performanceMonitor.PublishTimedAction(() => _ruleManager.Matches(currentLayer.Record.LayerRule), (r, t) => new LayerMessage
+                    var layerRuleMatches = _performanceMonitor.PublishTimedAction(() => _conditionManager.Matches(currentLayer.Record.LayerRule), (r, t) => new LayerMessage
                     {
                         Active = r,
                         Name = currentLayer.Record.Name,
